@@ -31,16 +31,9 @@
       font-size: 16px;
       margin-bottom: 20px;
     }
-    a {
-      color: white;
-      background-color: #1a73e8;
-      padding: 10px 20px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    a:hover {
-      background-color: #155ac6;
+    .fadeout {
+      font-size: 14px;
+      color: #666;
     }
   </style>
 </head>
@@ -49,11 +42,20 @@
     <h1>🎉 Thank you!</h1>
     <p>Your payment was successful. Value-based filtering is now unlocked.</p>
   </div>
-  <p>This window will close automatically. You may now return to the extension.</p>
+  <p class="fadeout">This window will close in <span id="countdown">3</span> seconds...</p>
+
   <script>
-    setTimeout(() => {
-      window.close();
-    }, 3000);
+    let seconds = 3;
+    const countdownEl = document.getElementById('countdown');
+    const interval = setInterval(() => {
+      seconds--;
+      if (seconds <= 0) {
+        clearInterval(interval);
+        window.close();
+      } else {
+        countdownEl.textContent = seconds;
+      }
+    }, 1000);
   </script>
 </body>
 </html>
