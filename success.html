@@ -1,109 +1,46 @@
-
-
-
-<!-- success.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
   <title>Payment Successful</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f9ff;
+      color: #333;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       height: 100vh;
       margin: 0;
-      background-color: #f5f5f5;
+      text-align: center;
     }
     .container {
-      text-align: center;
-      padding: 2rem;
-      border-radius: 8px;
-      background-color: white;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      max-width: 500px;
+      max-width: 400px;
+      padding: 30px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
     }
     h1 {
-      color: #4CAF50;
-      margin-bottom: 1rem;
+      color: #1a73e8;
+      margin-bottom: 10px;
     }
     p {
-      margin-bottom: 1.5rem;
-      color: #555;
-      line-height: 1.5;
-    }
-    .button {
-      background-color: #4285f4;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 4px;
-      cursor: pointer;
       font-size: 16px;
-      transition: background-color 0.2s;
+      margin-bottom: 20px;
     }
-    .button:hover {
-      background-color: #3367d6;
-    }
-    .success-icon {
-      font-size: 72px;
-      color: #4CAF50;
-      margin-bottom: 1rem;
+    .fadeout {
+      font-size: 14px;
+      color: #666;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="success-icon">✓</div>
-    <h1>Payment Successful!</h1>
-    <p>Thank you for your purchase! The Value Ranking feature has been unlocked in your extension.</p>
-    <p>You can now close this page and enjoy your premium features.</p>
-    <button class="button" id="closeButton">Close and Return to YouTube</button>
+    <h1>🎉 Thank you!</h1>
+    <p>Your payment was successful. Value-based filtering is now unlocked. You can now close this page and enjoy your premium features.</p>
   </div>
-
-  <script>
-    // Get email from URL query parameter
-    const urlParams = new URLSearchParams(window.location.search);
-    const email = urlParams.get('email');
-    
-    document.getElementById('closeButton').addEventListener('click', function() {
-      // Get all Chrome extension IDs that might match our extension
-      // Replace with your actual extension ID
-      const extensionIds = [
-        'your-extension-id-here' // Replace this with your actual extension ID
-      ];
-      
-      // Try to send message to extension
-      let messageSent = false;
-      
-      for (const extensionId of extensionIds) {
-        try {
-          chrome.runtime.sendMessage(extensionId, 
-            { action: "paymentComplete", email: email }, 
-            function(response) {
-              if (response && response.status === "success") {
-                console.log("Payment status updated in extension");
-                messageSent = true;
-                // Close this window
-                window.close();
-              }
-            }
-          );
-        } catch (e) {
-          console.log("Error sending message to extension:", e);
-        }
-      }
-      
-      // If message sending fails or there's no response, close anyway after a short delay
-      setTimeout(() => {
-        if (!messageSent) {
-          window.close();
-        }
-      }, 500);
-    });
-  </script>
 </body>
 </html>
