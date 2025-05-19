@@ -43,19 +43,5 @@
     <p>Your payment was successful. Value-based filtering is now unlocked.</p>
   </div>
   <p class="fadeout">This window will close in <span id="countdown">3</span> seconds...</p>
-
-  <script>
-    let seconds = 3;
-    const countdownEl = document.getElementById('countdown');
-    const interval = setInterval(() => {
-      seconds--;
-      if (seconds <= 0) {
-        clearInterval(interval);
-        window.close();
-      } else {
-        countdownEl.textContent = seconds;
-      }
-    }, 1000);
-  </script>
 </body>
 </html>
